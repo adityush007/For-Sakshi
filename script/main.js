@@ -302,4 +302,14 @@ const resolveFetch = () => {
   });
 };
 
-resolveFetch().then(animationTimeline());
+resolveFetch().then(() => {
+  animationTimeline();
+  
+  // Play background music
+  const bgMusic = document.getElementById("bg-music");
+  if (bgMusic) {
+    bgMusic.play().catch((error) => {
+      console.log("Audio autoplay was prevented:", error);
+    });
+  }
+});
