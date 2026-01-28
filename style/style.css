@@ -107,6 +107,7 @@ body {
 .idea-6 span,
 .wish-hbd span {
   display: inline-block;
+  margin-right: 0.1em;
 }
 
 .idea-6 span {
