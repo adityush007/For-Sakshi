@@ -305,24 +305,20 @@ const resolveFetch = () => {
 resolveFetch().then(() => {
   animationTimeline();
   
-  // Play background music after a short delay to allow user interaction
-  setTimeout(() => {
-    const bgMusic = document.getElementById("bg-music");
-    if (bgMusic) {
-      bgMusic.volume = 0.5; // Set volume to 50%
-      bgMusic.play().catch((error) => {
-        console.log("Audio autoplay was prevented:", error);
-      });
-    }
-  }, 500);
+  // Play muted background music immediately
+  const bgMusic = document.getElementById("bg-music");
+  if (bgMusic) {
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch((error) => {
+      console.log("Could not autoplay audio:", error);
+    });
+  }
 });
 
-// Also allow click to start music as fallback
+// Unmute on first user interaction
 document.addEventListener("click", () => {
   const bgMusic = document.getElementById("bg-music");
-  if (bgMusic && bgMusic.paused) {
-    bgMusic.play().catch((error) => {
-      console.log("Could not play audio:", error);
-    });
+  if (bgMusic) {
+    bgMusic.muted = false;
   }
 }, { once: true });
